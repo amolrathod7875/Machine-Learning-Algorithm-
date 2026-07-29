@@ -1,3 +1,5 @@
+cc   
+
 # PCA Dimensionality Reduction on Boston Housing Dataset
 
 ## Objective
@@ -33,9 +35,7 @@ PCA is an unsupervised dimensionality reduction technique that transforms a set 
 **Key Concepts:**
 
 1. **Variance Explained**: Each principal component captures a portion of the total variance in the data. The first component captures the most variance, with subsequent components capturing decreasing amounts.
-
 2. **Eigenvalue Decomposition**: PCA performs eigenvalue decomposition on the covariance matrix of the features to find principal components (eigenvectors) and their corresponding eigenvalues (variance explained).
-
 3. **Dimensionality Reduction**: By selecting only the top k components that explain sufficient variance (e.g., 95%), we can reduce the feature space while retaining most information.
 
 ### Why Use PCA?
@@ -50,7 +50,7 @@ PCA is an unsupervised dimensionality reduction technique that transforms a set 
 For a dataset X with n samples and p features:
 
 1. Standardize the features to zero mean and unit variance
-2. Compute the covariance matrix: $\Sigma = \frac{1}{n} X^{\top}X$ 
+2. Compute the covariance matrix: $\Sigma = \frac{1}{n} X^{\top}X$
 3. Calculate eigenvalues and eigenvectors: $\Sigma v = \lambda v$
 4. Sort eigenvectors by descending eigenvalues
 5. Select top k eigenvectors as principal components
@@ -92,6 +92,7 @@ X_scaled = scaler.fit_transform(X_train)
 **Answer:** Use the cumulative explained variance ratio - select k components where variance explained ≥ 95% (or a threshold), or use Kaiser's rule (eigenvalues > 1).
 
 **Example:**
+
 ```python
 import numpy as np
 pca_full = PCA()
@@ -109,6 +110,7 @@ print(f"Components needed for 95% variance: {optimal_k}")
 **Answer:** Explained variance is the proportion of total variance captured by each individual component. Cumulative explained variance is the running sum, showing total variance captured by the first k components.
 
 **Example:**
+
 ```
 Component 1: 45% variance (individual)
 Component 2: 25% variance (individual)
@@ -120,7 +122,8 @@ Cumulative: 45%, 70%, 85% respectively
 
 **Answer:** Reducing dimensions with PCA can increase bias (loss of information) but reduce variance (less overfitting). The optimal PCA components balance this trade-off.
 
-**Example:** 
+**Example:**
+
 - With all 13 features: model may overfit (low training error, high test error)
 - With 5 PCA components: model generalizes better with slightly higher bias but lower variance
 
@@ -129,6 +132,7 @@ Cumulative: 45%, 70%, 85% respectively
 **Answer:** Performance can improve due to: reduced noise, removal of multicollinearity, better generalization. Performance can degrade when: important predictive information is lost in discarded components, or the linear relationship assumption doesn't hold.
 
 **Example from our analysis:**
+
 ```python
 # Baseline (13 features)
 MSE: 24.5, R²: 0.68
@@ -144,6 +148,7 @@ MSE: 26.1, R²: 0.65
 **Answer:** Yes, through component loadings (weights). Each component is a linear combination of original features. High absolute loading values indicate strong contribution.
 
 **Example:**
+
 ```python
 pca = PCA(n_components=3)
 loadings = pd.DataFrame(
@@ -158,7 +163,8 @@ print(loadings)
 
 ### 8. What are the limitations of PCA for dimensionality reduction?
 
-**Answer:** 
+**Answer:**
+
 - Assumes linear relationships between features
 - Components may be hard to interpret
 - Sensitive to outliers
@@ -172,6 +178,7 @@ print(loadings)
 **Answer:** Use robust scaling, clipping, or remove outliers using IQR/Z-score methods.
 
 **Example:**
+
 ```python
 from sklearn.preprocessing import RobustScaler
 from scipy import stats
@@ -188,6 +195,7 @@ X_clean = X_train[(z_scores < 3).all(axis=1)]
 ### 10. What alternative dimensionality reduction techniques exist besides PCA?
 
 **Answer:**
+
 - **t-SNE**: Non-linear, preserves local structure (good for visualization)
 - **UMAP**: Non-linear, preserves both local and global structure
 - **ICA**: Independent Component Analysis (finds independent sources)
@@ -196,6 +204,7 @@ X_clean = X_train[(z_scores < 3).all(axis=1)]
 - **Autoencoders**: Neural network-based non-linear dimensionality reduction
 
 **Example using t-SNE:**
+
 ```python
 from sklearn.manifold import TSNE
 
@@ -246,21 +255,22 @@ flowchart TD
 ## Analysis Steps
 
 1. **Data Loading and Preprocessing**
+
    - Load Boston Housing dataset
    - Split into training and test sets (80/20)
    - Handle missing values using median imputation
    - Standardize features to have zero mean and unit variance
-
 2. **Baseline Model Training**
+
    - Train a Linear Regression model on all 13 features
    - Evaluate performance using MSE and R² score
-
 3. **PCA Experimentation**
+
    - Apply PCA with varying number of components (1 to 13)
    - Train Linear Regression on transformed features
    - Record MSE, R², and variance explained for each configuration
-
 4. **Visualization and Interpretation**
+
    - Plot model performance against number of components
    - Plot cumulative variance explained
    - Identify optimal number of components balancing performance and dimensionality
