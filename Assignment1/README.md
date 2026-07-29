@@ -50,11 +50,11 @@ PCA is an unsupervised dimensionality reduction technique that transforms a set 
 For a dataset X with n samples and p features:
 
 1. Standardize the features to zero mean and unit variance
-2. Compute the covariance matrix: Σ = (1/n) X^T X
-3. Calculate eigenvalues and eigenvectors: Σv = λv
+2. Compute the covariance matrix: $\Sigma = \frac{1}{n} X^{\top}X$ 
+3. Calculate eigenvalues and eigenvectors: $\Sigma v = \lambda v$
 4. Sort eigenvectors by descending eigenvalues
 5. Select top k eigenvectors as principal components
-6. Transform data: X_pca = X · W (where W is the projection matrix)
+6. Transform data: $X_{\text{PCA}} = XW$ (where W is the projection matrix)
 
 ## Faculty Questions
 
