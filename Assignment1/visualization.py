@@ -8,13 +8,11 @@ def plot_pca_results(results_df, mse_baseline, r2_baseline):
     Parameters:
     -----------
     results_df : pd.DataFrame
-        Must contain columns: n_components, variance_explained, mse, r2, train_time
+        Must contain columns: n_components, variance_explained, mse, r2_score
     mse_baseline : float
         Baseline MSE without PCA
     r2_baseline : float
         Baseline R² score without PCA
-    train_time_baseline : float
-        Baseline training time without PCA
     """
     fig, axes = plt.subplots(2, 2, figsize=(14, 10))
 
@@ -35,6 +33,13 @@ def plot_pca_results(results_df, mse_baseline, r2_baseline):
     ax2.set_title('Model Performance: R² vs Components')
     ax2.legend()
     ax2.grid(True, alpha=0.3)
+
+    ax3 = axes[1, 0]
+    ax3.bar(results_df['n_components'], results_df['variance_explained'], color='steelblue', alpha=0.7, edgecolor='white')
+    ax3.set_xlabel('Number of PCA Components')
+    ax3.set_ylabel('Explained Variance Ratio')
+    ax3.set_title('Individual Variance Explained per Component')
+    ax3.grid(True, alpha=0.3)
 
     ax4 = axes[1, 1]
     ax4.plot(results_df['n_components'], results_df['variance_explained'], 'purple', marker='o', linewidth=2, markersize=6)
