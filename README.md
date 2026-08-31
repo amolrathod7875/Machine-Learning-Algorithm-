@@ -1,9 +1,217 @@
-# Machine-Learning-Algorithm-
+# Machine Learning Algorithm — Assignments Workspace
 
-## Assignments
+A collection of four self-contained machine learning assignments that demonstrate core techniques in dimensionality reduction, regression, and classification using `scikit-learn`, `pandas`, and `matplotlib`. Each assignment is independently documented and includes a detailed theoretical write-up, a flowchart, and a set of likely exam/faculty questions with answers.
 
-### Assignment 1: PCA Dimensionality Reduction
+## Table of Contents
 
-See `Assignment1/README.md` for full documentation.
+- [Project Description](#project-description)
+- [Assignments Overview](#assignments-overview)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Project Architecture](#project-architecture)
+- [Configuration](#configuration)
+- [Running Tests](#running-tests)
+- [Contributing](#contributing)
+- [Dependencies](#dependencies)
 
-This assignment applies Principal Component Analysis (PCA) for dimensionality reduction on the Boston Housing dataset to observe the influence of feature reduction on model performance and computational efficiency.
+## Project Description
+
+This repository is a learning-oriented workspace that walks through foundational machine learning algorithms applied to well-known public datasets:
+
+1. **PCA (Principal Component Analysis)** — Unsupervised dimensionality reduction on the Boston Housing dataset, studying the trade-off between feature reduction and model performance.
+2. **LDA vs PCA** — A supervised/unsupervised comparison of Linear Discriminant Analysis against PCA on the same Boston Housing dataset.
+3. **Regression Pipeline** — A full cab-price prediction pipeline comparing Linear, Ridge, and Lasso regression on Uber/Lyft ride data.
+4. **Logistic Regression** — Binary classification of diabetes risk using the Pima Indians Diabetes dataset, evaluated with a confusion matrix, precision, recall, and F1-score.
+
+The assignments emphasize hands-on experimentation, clear theory, and reproducible results rather than production deployment.
+
+## Assignments Overview
+
+| Assignment | Topic | Primary Algorithm(s) | Dataset | Interface |
+| --- | --- | --- | --- | --- |
+| 1 | Dimensionality Reduction | PCA | Boston Housing (`HousingData.csv`) | Jupyter Notebook + `visualization.py` |
+| 2 | PCA vs LDA | PCA, LDA | Boston Housing | Jupyter Notebook |
+| 3 | Regression Pipeline | Linear, Ridge, Lasso | Uber/Lyft (`cab_rides.csv`, `weather.csv`) | Python script (`assignment3.py`) |
+| 4 | Classification | Logistic Regression | Pima Indians Diabetes (`diabetes.csv`) | Jupyter Notebook |
+
+## Prerequisites
+
+- **Python** 3.8 or newer
+- **pip** (Python package manager)
+- **Git** (to clone the repository)
+- A terminal / command prompt (PowerShell, Bash, or similar)
+- For notebook-based assignments: **Jupyter Notebook** or **JupyterLab** (or Google Colab)
+
+## Installation
+
+1. **Clone the repository**
+
+   ```bash
+   git clone <repository-url>
+   cd Machine-Learning-Algorithm-
+   ```
+
+2. **(Recommended) Create and activate a virtual environment**
+
+   ```bash
+   # Windows
+   python -m venv .venv
+   .venv\Scripts\activate
+
+   # macOS / Linux
+   python3 -m venv .venv
+   source .venv/bin/activate
+   ```
+
+3. **Install dependencies**
+
+   ```bash
+   pip install -r requirement.txt
+   ```
+
+   This installs: `pandas`, `numpy`, `matplotlib`, `scikit-learn`, and `kaggle`.
+
+   For the notebook-based assignments (1, 2, and 4) you will also need Jupyter:
+
+   ```bash
+   pip install jupyter
+   ```
+
+## Usage
+
+Each assignment is run independently. Choose the appropriate command for the assignment you want to execute.
+
+### Assignment 1 — PCA Dimensionality Reduction
+
+```bash
+jupyter notebook Assignment1/Assignment_1.ipynb
+```
+
+The notebook loads `Assignment1/HousingData.csv`, standardizes the features, trains a baseline Linear Regression model, applies PCA with varying component counts, and produces `Assignment1/output.png`. Visualization helpers live in `Assignment1/visualization.py`.
+
+### Assignment 2 — LDA vs PCA
+
+```bash
+jupyter notebook Assignment2/Assignment_2.ipynb
+```
+
+Compares PCA (unsupervised) and LDA (supervised, using a discretized MEDV target) on the Boston Housing dataset, generating the `ass2.*.png` figures.
+
+### Assignment 3 — Regression Pipeline
+
+```bash
+cd Assignment3
+python assignment3.py
+```
+
+Trains and compares Linear, Ridge, and Lasso regression models on `cab_rides.csv` joined with `weather.csv`. Produces:
+
+- `outliers_boxplot.png` — Boxplot of ride prices showing outliers
+- `correlation_matrix.png` — Heatmap of numerical feature correlations
+
+### Assignment 4 — Logistic Regression
+
+Open `Assignment4/assignment4.ipynb` in Jupyter or Google Colab and run all cells sequentially. The notebook reads `Assignment4/diabetes.csv` and outputs the confusion matrix, precision, recall, and F1-score, plus a heatmap visualization (`output.png`).
+
+> **Note:** Assignment 4's notebook references `google.colab` for Drive mounting. When running locally, ensure `diabetes.csv` is present in the working directory and remove or adapt the Colab-specific cells as needed.
+
+## Project Architecture
+
+The workspace is organized as a flat collection of per-assignment folders, each self-contained with its own data, code, outputs, and documentation.
+
+```
+Machine-Learning-Algorithm-/
+├── README.md                 # This file — workspace-level documentation
+├── requirement.txt           # Shared Python dependencies
+├── .gitignore                # Ignored build/artifact files
+├── Assignment1/              # PCA on Boston Housing
+│   ├── Assignment_1.ipynb    #   Main analysis notebook
+│   ├── HousingData.csv       #   Dataset
+│   ├── visualization.py      #   PCA plotting helpers
+│   ├── output.png            #   Generated visualization
+│   └── README.md             #   Assignment documentation
+├── Assignment2/              # LDA vs PCA comparison
+│   ├── Assignment_2.ipynb    #   Main analysis notebook
+│   ├── HousingData.csv       #   Dataset
+│   ├── ass2.2.png … ass2.5.png, output.png
+│   └── README.md
+├── Assignment3/              # Cab price regression pipeline
+│   ├── assignment3.py        #   End-to-end Python script
+│   ├── cab_rides.csv         #   Primary dataset
+│   ├── weather.csv           #   Auxiliary dataset
+│   ├── correlation_matrix.png
+│   ├── outliers_boxplot.png
+│   └── README.md
+└── Assignment4/              # Logistic Regression classification
+    ├── assignment4.ipynb     #   Main analysis notebook
+    ├── diabetes.csv          #   Dataset
+    ├── output.png            #   Confusion matrix heatmap
+    └── README.md
+```
+
+### Data flow
+
+Each assignment follows a common ML pipeline:
+
+1. **Load** the dataset (CSV).
+2. **Preprocess** — handle missing values, standardize/scale features, encode categorical variables.
+3. **Split** into train/test sets (typically 80/20, `random_state=42`).
+4. **Train** one or more models.
+5. **Evaluate** using task-appropriate metrics (MSE/R² for regression, precision/recall/F1 for classification).
+6. **Visualize** results (variance explained, performance curves, correlation heatmaps, confusion matrices).
+
+## Configuration
+
+There is no external configuration file; hyperparameters are set inline within each script/notebook:
+
+- `StandardScaler` for feature standardization (scale-sensitive algorithms such as PCA, LDA, and regularized regression).
+- `train_test_split(..., test_size=0.2, random_state=42)` for reproducible splits.
+- `PCA(n_components=...)` / `LinearDiscriminantAnalysis(n_components=...)` for the number of retained components.
+- `Ridge(alpha=...)` / `Lasso(alpha=...)` for regularization strength.
+- `LogisticRegression(solver='liblinear', random_state=42)` for the classification solver.
+
+Adjust these values directly in the source files to experiment.
+
+## Running Tests
+
+This repository does not ship an automated test suite. To validate an assignment manually:
+
+- **Assignments 1, 2, 4 (notebooks):** Run all cells and confirm metrics/outputs print without errors and figures are generated.
+- **Assignment 3 (script):** Run `python assignment3.py` from `Assignment3/` and confirm the model comparison output and the two `.png` files are produced.
+
+Optional sanity check that dependencies import correctly:
+
+```bash
+python -c "import pandas, numpy, matplotlib, sklearn; print('dependencies OK')"
+```
+
+## Contributing
+
+Contributions are welcome for educational improvement. To contribute:
+
+1. Fork the repository and create a feature branch (`git checkout -b assignment-5-feature`).
+2. Add or modify an assignment, keeping its folder self-contained (data, code, outputs, `README.md`).
+3. Follow the existing documentation style — include an Objective/Theory section, a Mermaid flowchart, and a Q&A section where appropriate.
+4. Ensure code runs cleanly with the shared `requirement.txt` and uses `random_state=42` for reproducibility.
+5. Open a pull request describing the change and the dataset used.
+
+Please keep each assignment independently runnable and document any new dependencies.
+
+## Dependencies
+
+All assignments rely on the packages listed in [`requirement.txt`](./requirement.txt):
+
+| Package | Purpose |
+| --- | --- |
+| `pandas` | Data loading and manipulation |
+| `numpy` | Numerical computation |
+| `matplotlib` | Plotting and visualization |
+| `scikit-learn` | ML models, preprocessing, and metrics |
+| `kaggle` | (Optional) dataset download via the Kaggle API |
+
+For notebook execution, also install `jupyter`. Assignment 4's notebook additionally uses `seaborn` for its confusion-matrix heatmap.
+
+## License
+
+This is an educational workspace; refer to individual dataset licenses (UCI ML Repository, Kaggle) for data usage terms.
