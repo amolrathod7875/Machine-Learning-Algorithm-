@@ -23,6 +23,7 @@ This repository is a learning-oriented workspace that walks through foundational
 2. **LDA vs PCA** — A supervised/unsupervised comparison of Linear Discriminant Analysis against PCA on the same Boston Housing dataset.
 3. **Regression Pipeline** — A full cab-price prediction pipeline comparing Linear, Ridge, and Lasso regression on Uber/Lyft ride data.
 4. **Logistic Regression** — Binary classification of diabetes risk using the Pima Indians Diabetes dataset, evaluated with a confusion matrix, precision, recall, and F1-score.
+5. **K-Means Clustering** — Unsupervised clustering on the Iris dataset using the Elbow Method to determine the optimal number of clusters.
 
 The assignments emphasize hands-on experimentation, clear theory, and reproducible results rather than production deployment.
 
@@ -34,6 +35,8 @@ The assignments emphasize hands-on experimentation, clear theory, and reproducib
 | 2 | PCA vs LDA | PCA, LDA | Boston Housing | Jupyter Notebook |
 | 3 | Regression Pipeline | Linear, Ridge, Lasso | Uber/Lyft (`cab_rides.csv`, `weather.csv`) | Python script (`assignment3.py`) |
 | 4 | Classification | Logistic Regression | Pima Indians Diabetes (`diabetes.csv`) | Jupyter Notebook |
+| 5 | SVM Classification | SVM (RBF kernel) | Digits (built-in) | Python script (`Code.py`) |
+| 6 | Clustering | K-Means, Elbow Method | Iris (built-in) | Python script (`Code.py`) |
 
 ## Prerequisites
 
@@ -115,6 +118,22 @@ Trains and compares Linear, Ridge, and Lasso regression models on `cab_rides.csv
 Open `Assignment4/assignment4.ipynb` in Jupyter or Google Colab and run all cells sequentially. The notebook reads `Assignment4/diabetes.csv` and outputs the confusion matrix, precision, recall, and F1-score, plus a heatmap visualization (`output.png`).
 
 > **Note:** Assignment 4's notebook references `google.colab` for Drive mounting. When running locally, ensure `diabetes.csv` is present in the working directory and remove or adapt the Colab-specific cells as needed.
+
+### Assignment 5 — SVM Classification
+
+```bash
+python Assignment5/Code.py
+```
+
+Trains an SVM classifier with an RBF kernel on the built-in scikit-learn Digits dataset (1797 samples of 8x8 handwritten digits). Prints a classification report and accuracy score.
+
+### Assignment 6 — K-Means Clustering
+
+```bash
+python Assignment6/Code.py
+```
+
+Applies K-Means clustering on the built-in Iris dataset, determines the optimal number of clusters using the Elbow Method and Silhouette Score, and produces `elbow_and_clusters.png` with the elbow curve, silhouette scores, and final cluster visualization.
 
 ## Project Architecture
 
