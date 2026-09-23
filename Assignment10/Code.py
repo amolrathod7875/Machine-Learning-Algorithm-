@@ -211,12 +211,12 @@ def evaluate(agent, num_games=500, opponent="random", verbose=False):
             opp_state, opp_reward, done_after_opp, _ = env.step(opp_action)
 
             if done_after_opp:
-                if opp_reward == 1.0:
-                    losses += 1
-                elif opp_reward == 0.5:
-                    draws += 1
-                else:
+                if env.winner == 1:
                     wins += 1
+                elif env.winner == -1:
+                    losses += 1
+                else:
+                    draws += 1
                 done = True
             else:
                 state = opp_state
