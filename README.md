@@ -1,6 +1,6 @@
 # Machine Learning Algorithm — Assignments Workspace
 
-A collection of eight self-contained machine learning assignments that demonstrate core techniques in dimensionality reduction, regression, classification, clustering, ensemble learning, and computer vision using `scikit-learn`, `pandas`, `matplotlib`, and `OpenCV`. Each assignment is independently documented and includes a detailed theoretical write-up, a flowchart, and a set of likely exam/faculty questions with answers.
+A collection of nine self-contained machine learning assignments that demonstrate core techniques in dimensionality reduction, regression, classification, clustering, ensemble learning, computer vision, and reinforcement learning using `scikit-learn`, `pandas`, `matplotlib`, and `OpenCV`. Each assignment is independently documented and includes a detailed theoretical write-up, a flowchart, and a set of likely exam/faculty questions with answers.
 
 ## Table of Contents
 
@@ -27,6 +27,7 @@ This repository is a learning-oriented workspace that walks through foundational
 6. **K-Means Clustering** — Unsupervised clustering on the Iris dataset using the Elbow Method to determine the optimal number of clusters.
 7. **OpenCV + AI Inference** — Image reading and annotation with OpenCV, plus AI-powered face detection using YuNet via OpenCV's DNN module.
 8. **Random Forest Classifier** — Ensemble classification on the Breast Cancer Wisconsin dataset, comparing Random Forest against a Logistic Regression baseline using accuracy, precision, recall, F1-score, and feature importance.
+9. **Q-Learning Maze Navigation** — Model-free reinforcement learning where an agent learns to navigate a 10×10 grid maze to reach a goal state using ε-greedy exploration and the Bellman equation.
 
 The assignments emphasize hands-on experimentation, clear theory, and reproducible results rather than production deployment.
 
@@ -42,6 +43,7 @@ The assignments emphasize hands-on experimentation, clear theory, and reproducib
 | 6 | Clustering | K-Means, Elbow Method | Iris (built-in) | Python script (`Code.py`) |
 | 7 | Computer Vision / AI Inference | OpenCV, YuNet Face Detector | `test_preview.jpg` + OpenCV Zoo model | Python script (`Code.py`) |
 | 8 | Ensemble Classification | Random Forest vs Logistic Regression | Breast Cancer Wisconsin (built-in) | Python script (`Code.py`) |
+| 9 | Reinforcement Learning | Q-Learning (ε-greedy) | Custom 10×10 grid maze | Python script (`Code.py`) |
 
 ## Prerequisites
 
@@ -156,6 +158,14 @@ python Assignment8/Code.py
 
 Compares a Random Forest Classifier against a Logistic Regression baseline on the built-in Breast Cancer Wisconsin dataset. Prints accuracy, precision, recall, and F1-score for both models, and generates `comparison_confusion_matrix.png` and `performance_comparison.png`.
 
+### Assignment 9 — Q-Learning Maze Navigation
+
+```bash
+python Assignment9/Code.py
+```
+
+Trains a Q-Learning agent to navigate a 10×10 grid maze from the top-left start to the bottom-right goal. The agent uses ε-greedy exploration and the Bellman equation to learn optimal actions. Prints episode metrics, learned path length, and success rate. Generates `maze_rl_results.png` (maze + path + Q-value heatmap) and `maze_learning_curve.png` (convergence plot).
+
 ## Project Architecture
 
 The workspace is organized as a flat collection of per-assignment folders, each self-contained with its own data, code, outputs, and documentation.
@@ -207,6 +217,11 @@ Machine-Learning-Algorithm-/
 │   ├── comparison_confusion_matrix.png               #   Confusion matrices
 │   ├── performance_comparison.png                    #   Metrics comparison chart
 │   └── README.md
+├── Assignment9/                                      # Q-Learning maze navigation
+│   ├── Code.py                                       #   Main Python script
+│   ├── maze_rl_results.png                           #   Maze, path, Q-value heatmap
+│   ├── maze_learning_curve.png                       #   Reward convergence plot
+│   └── README.md
 ```
 
 ### Data flow
@@ -231,6 +246,7 @@ There is no external configuration file; hyperparameters are set inline within e
 - `LogisticRegression(solver='liblinear', random_state=42)` for the classification solver.
 - `cv2.FaceDetectorYN.create(model, None, input_size, score_threshold, nms_threshold, top_k)` for OpenCV DNN face detection.
 - `RandomForestClassifier(n_estimators=200, random_state=42)` for ensemble classification in Assignment 8.
+- `alpha=0.1`, `gamma=0.99`, `epsilon=1.0→0.05` for Q-Learning hyperparameters in Assignment 9.
 
 Adjust these values directly in the source files to experiment.
 
@@ -239,7 +255,7 @@ Adjust these values directly in the source files to experiment.
 This repository does not ship an automated test suite. To validate an assignment manually:
 
 - **Assignments 1, 2, 4 (notebooks):** Run all cells and confirm metrics/outputs print without errors and figures are generated.
-- **Assignments 3, 5, 6, 7, 8 (scripts):** Run the corresponding `python Code.py` or `python assignment3.py` from the assignment directory and confirm the expected outputs are produced.
+- **Assignments 3, 5, 6, 7, 8, 9 (scripts):** Run the corresponding `python Code.py` or `python assignment3.py` from the assignment directory and confirm the expected outputs are produced.
 
 Optional sanity check that dependencies import correctly:
 
