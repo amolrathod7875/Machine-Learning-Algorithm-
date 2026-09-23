@@ -3,3 +3,5 @@ numpy
 matplotlib
 scikit-learn
 kaggle
+opencv-python-headless
+requests
