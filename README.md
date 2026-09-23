@@ -1,6 +1,6 @@
 # Machine Learning Algorithm — Assignments Workspace
 
-A collection of nine self-contained machine learning assignments that demonstrate core techniques in dimensionality reduction, regression, classification, clustering, ensemble learning, computer vision, and reinforcement learning using `scikit-learn`, `pandas`, `matplotlib`, and `OpenCV`. Each assignment is independently documented and includes a detailed theoretical write-up, a flowchart, and a set of likely exam/faculty questions with answers.
+A collection of ten self-contained machine learning assignments that demonstrate core techniques in dimensionality reduction, regression, classification, clustering, ensemble learning, computer vision, and reinforcement learning using `scikit-learn`, `pandas`, `matplotlib`, and `OpenCV`. Each assignment is independently documented and includes a detailed theoretical write-up, a flowchart, and a set of likely exam/faculty questions with answers.
 
 ## Table of Contents
 
@@ -28,6 +28,7 @@ This repository is a learning-oriented workspace that walks through foundational
 7. **OpenCV + AI Inference** — Image reading and annotation with OpenCV, plus AI-powered face detection using YuNet via OpenCV's DNN module.
 8. **Random Forest Classifier** — Ensemble classification on the Breast Cancer Wisconsin dataset, comparing Random Forest against a Logistic Regression baseline using accuracy, precision, recall, F1-score, and feature importance.
 9. **Q-Learning Maze Navigation** — Model-free reinforcement learning where an agent learns to navigate a 10×10 grid maze to reach a goal state using ε-greedy exploration and the Bellman equation.
+10. **Tic-Tac-Toe with Q-Learning** — Tabular reinforcement learning agent trained to play Tic-Tac-Toe as X against a random opponent, evaluated against both random and minimax opponents.
 
 The assignments emphasize hands-on experimentation, clear theory, and reproducible results rather than production deployment.
 
@@ -44,6 +45,7 @@ The assignments emphasize hands-on experimentation, clear theory, and reproducib
 | 7 | Computer Vision / AI Inference | OpenCV, YuNet Face Detector | `test_preview.jpg` + OpenCV Zoo model | Python script (`Code.py`) |
 | 8 | Ensemble Classification | Random Forest vs Logistic Regression | Breast Cancer Wisconsin (built-in) | Python script (`Code.py`) |
 | 9 | Reinforcement Learning | Q-Learning (ε-greedy) | Custom 10×10 grid maze | Python script (`Code.py`) |
+| 10 | Reinforcement Learning | Q-Learning (tabular) | Tic-Tac-Toe (3×3) | Python script (`Code.py`) |
 
 ## Prerequisites
 
@@ -166,6 +168,14 @@ python Assignment9/Code.py
 
 Trains a Q-Learning agent to navigate a 10×10 grid maze from the top-left start to the bottom-right goal. The agent uses ε-greedy exploration and the Bellman equation to learn optimal actions. Prints episode metrics, learned path length, and success rate. Generates `maze_rl_results.png` (maze + path + Q-value heatmap) and `maze_learning_curve.png` (convergence plot).
 
+### Assignment 10 — Tic-Tac-Toe with Q-Learning
+
+```bash
+python Assignment10/Code.py
+```
+
+Trains a tabular Q-Learning agent to play Tic-Tac-Toe as X against a random opponent over 5,000 episodes. Prints training progress, evaluates the agent against random and minimax opponents, and generates `tictactoe_results.png` (training curves and final performance comparison). Includes a demo game with move-by move board output.
+
 ## Project Architecture
 
 The workspace is organized as a flat collection of per-assignment folders, each self-contained with its own data, code, outputs, and documentation.
@@ -222,6 +232,10 @@ Machine-Learning-Algorithm-/
 │   ├── maze_rl_results.png                           #   Maze, path, Q-value heatmap
 │   ├── maze_learning_curve.png                       #   Reward convergence plot
 │   └── README.md
+├── Assignment10/                                     # Tic-Tac-Toe Q-Learning
+│   ├── Code.py                                       #   Main Python script
+│   ├── tictactoe_results.png                         #   Training & performance plots
+│   └── README.md
 ```
 
 ### Data flow
@@ -247,6 +261,7 @@ There is no external configuration file; hyperparameters are set inline within e
 - `cv2.FaceDetectorYN.create(model, None, input_size, score_threshold, nms_threshold, top_k)` for OpenCV DNN face detection.
 - `RandomForestClassifier(n_estimators=200, random_state=42)` for ensemble classification in Assignment 8.
 - `alpha=0.1`, `gamma=0.99`, `epsilon=1.0→0.05` for Q-Learning hyperparameters in Assignment 9.
+- `alpha=0.1`, `gamma=0.99`, `epsilon=1.0→0.01`, `decay=0.9995` for tabular Q-Learning hyperparameters in Assignment 10.
 
 Adjust these values directly in the source files to experiment.
 
@@ -255,7 +270,7 @@ Adjust these values directly in the source files to experiment.
 This repository does not ship an automated test suite. To validate an assignment manually:
 
 - **Assignments 1, 2, 4 (notebooks):** Run all cells and confirm metrics/outputs print without errors and figures are generated.
-- **Assignments 3, 5, 6, 7, 8, 9 (scripts):** Run the corresponding `python Code.py` or `python assignment3.py` from the assignment directory and confirm the expected outputs are produced.
+- **Assignments 3, 5, 6, 7, 8, 9, 10 (scripts):** Run the corresponding `python Code.py` or `python assignment3.py` from the assignment directory and confirm the expected outputs are produced.
 
 Optional sanity check that dependencies import correctly:
 
